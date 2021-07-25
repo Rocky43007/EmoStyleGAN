@@ -14,14 +14,24 @@ warnings.filterwarnings("ignore")
 
 plt.ion()   # interactive mode
 
-emotions_frame = pd.read_csv('datasets/emotion_data_with_painting_location.csv')
-
+emotions_frame = pd.read_csv(
+    'datasets/emotion_data_with_painting_location.csv')
 n = 0
-img_name = emotions_frame.iloc[n, 0]
-emotions = emotions_frame.iloc[n, 1:]
-emotions = np.asarray(emotions)
-#emotions = emotions.astype('float').reshape(-1, 2)
+datasetArray = []
+print('Loading and organizing Dataset')
+while n < emotions_frame.shape[0]:
+    img_name = emotions_frame.iloc[n, 0]
+    emotions = emotions_frame.iloc[n, 1:9]
+    emotions = np.asarray(emotions)
 
-print('Image name: {}'.format(img_name))
-print('Emotions shape: {}'.format(emotions.shape))
-print('First 4 Emotions from CSV: {}'.format(emotions[:4]))
+    #print('Image name: {}'.format(img_name))
+    #print('Emotions from CSV: {}'.format(emotions))
+    emotionMax = emotions.argmax()
+    #print('Max emotion vote: {}'.format(emotionMax))
+    #print('Max emotion name: {}'.format(emotions_frame.columns[emotionMax]))
+    datasetArray.append([img_name, emotions.argmax(), emotions_frame.columns[emotionMax]])
+    n += 1
+print('Adding to CSV')
+emotions_dataset = pd.DataFrame(datasetArray, columns=['image_name', 'labels', 'emotion_name'])
+emotions_dataset.to_csv('datasets/emotion_data_dataset.csv', index=False)
+print('Done')

@@ -1,0 +1,6 @@
+*.zip
+wikiart
+wikiart-dataset
+dist
+results
+wikiart_*
