@@ -9,7 +9,7 @@ from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms, utils
 from PIL import Image
 from glob import glob
-result = [y for x in os.walk('/home/achakra/EmoStyleGAN/datasets/wikiart_256') for y in glob(os.path.join(x[0], '*.jpg'))]
+result = [y for x in os.walk('~/EmoStyleGAN/datasets/wikiart_256') for y in glob(os.path.join(x[0], '*.jpg'))]
 
 # Ignore warnings
 import warnings
